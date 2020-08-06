@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flux pomodoro</title>
+    <link rel="stylesheet" href="./css/style.css"></link>
+</head>
+<body>
+    <div class="header">
+        <div id="reset-button" class="reset">
+            <img src="./img/reset.svg" alt="Reset timer">
+        </div>
+        <div class="dropdown">
+            <div id="menu" class="drop-btn">
+                <div class="circle-menu"></div>
+                <div class="circle-menu"></div>
+                <div class="circle-menu"></div>
+            </div>
+            <div id="settings-dd" class="dropdown-content">
+            </div>
+          </div> 
+    </div>
+    <h4 id="mode-text"></h4>
+    <div id="timer" class="main-content">
+        <h1 id="timer-text"></h1>
+    </div>
+    <div class="footer-section">
+        <div id="control-button" class="btn start-btn">
+            <img class="svg-btn" id="start-btn" src="./img/play.svg"/>
+            <img class="svg-btn" id="pause-btn" style="display: none;" src="./img/pause.svg"/>
+        </div>
+        <div id="slots-container">
+        </div>
+    </div>
+    
+</body>
+<script src="./config.js"></script>
+<script src="./js/store.js"></script>
+<script type="module" src="./js/index.js"></script>
+</html>

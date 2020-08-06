@@ -1,0 +1,19 @@
+{
+  "name": "flux",
+  "version": "1.0.0",
+  "description": "Minimal pomodoro app for linux, macos & windows",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "dilpreetsio",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^9.1.0",
+    "electron-reloader": "^1.0.1"
+  },
+  "dependencies": {
+    "styled-components": "^5.1.1"
+  }
+}

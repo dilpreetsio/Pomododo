@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap');
+html {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(1, 16, 34);
+    text-align: center;
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.reset {
+    width:16px;
+    height:16px;
+    padding: 4px;
+}
+
+.main-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    font-size: 30px;
+    text-align: center;
+}
+
+.footer-section {
+    height: 100%;
+    /* background-color: #5856d6; */
+    border-radius: 25% 25% 0 0;
+}
+
+.btn {
+    margin: 0 auto;
+    box-sizing: border-box;
+    width: 36px !important;
+    height: 36px !important;
+    cursor: pointer;
+}
+
+
+.start-btn:hover, .pause-btn:hover {
+    border-color: transparent transparent transparent #3282b8;
+}
+
+#slots-container {
+    margin: 5px;
+    margin-top: 90px;
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+}
+
+.slot {
+    width: 15px;
+    height: 7.5px;
+    margin: 5px;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.slot-completed {
+    background-color: white;
+}
+
+.slot-pending {
+    border: solid 1px;
+    border-color: white;
+}
+
+.drop-btn {
+    color: white;
+    padding: 4px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.drop-btn:hover, .drop-btn:focus {
+    background-color: #2980B9;  
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    text-align: left;
+}
+  
+.sub-menu {
+    display: block;     
+    font-size: 10px;
+    padding:2px;
+    text-decoration: none;
+    color: white;
+    background-color: #5856d6;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 1px;
+    background-color: #242323d7;
+    box-shadow: 3px 3px 5px 2px rgb(24, 23, 23);
+    min-width: 120px;
+    box-shadow: 1xp 1px;
+    z-index: 1;
+}
+
+.dropdown-content .menu-item {
+    font-size: 12px;
+    padding: 4px;
+    color: #fff;
+    text-decoration: none;
+    display: block;     
+}
+
+.dropdown-content .menu-item:hover {
+    background-color: #151524
+}
+
+.show { display:block; } 
+
+.circle-menu {
+    width: 4px;
+    height: 4px;
+    margin: 1px;
+    background-color: #5856d6;
+    border-radius: 100%;
+}
+
+.svg-btn {
+    height: 100%;
+    width: 100%;
+}
+
+.tick {
+    width: 14px;
+    float: right;
+    padding: 3px;
+}
