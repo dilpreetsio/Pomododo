@@ -1,4 +1,5 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, Menu } = require('electron')
+const path = require('path')
 
 try {
 	require('electron-reloader')(module);
@@ -6,17 +7,18 @@ try {
 
 function createWindow () {
   const win = new BrowserWindow({
-    width: 300,
-    height: 400,
-    transparent:true,
+    width: 450,
+    height: 160,
     resizable:false,
+    frame: false,
+    titleBarStyle: 'hidden',
     webPreferences: {
+      preload: path.join(__dirname, '/js/preload.js'),
       nodeIntegration: true
     }
   })
 
   win.loadFile('index.html')
-  win.removeMenu()
   win.webContents.openDevTools()
 }
 
