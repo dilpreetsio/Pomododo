@@ -1,5 +1,5 @@
 {
-  "name": "flux",
+  "name": "pomododo",
   "version": "1.0.0",
   "description": "Minimal pomodoro app for linux, macos & windows",
   "main": "main.js",
