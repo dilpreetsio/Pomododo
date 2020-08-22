@@ -5,16 +5,25 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
   },
   "author": "dilpreetsio",
   "license": "MIT",
+  "build": {
+    "appId": "com.dilpreetsio.pomododo",
+    "mac": {
+      "category": "com.dilpreetsio.pomododo.productivity"
+    }
+  },
+  "compression": "store",
   "devDependencies": {
     "electron": "^9.1.0",
-    "electron-reloader": "^1.0.1"
+    "electron-builder": "^22.8.0",
+    "electron-reloader": "^1.0.1",
+    "styled-components": "^5.1.1"
   },
   "dependencies": {
-    "custom-electron-titlebar": "^3.2.3",
-    "styled-components": "^5.1.1"
+    "custom-electron-titlebar": "^3.2.3"
   }
 }

@@ -8,9 +8,8 @@ const customTitlebar = require('custom-electron-titlebar');
 window.addEventListener('DOMContentLoaded', () => {
   new customTitlebar.Titlebar({
     backgroundColor: customTitlebar.Color.fromHex('#f0f0f0'),
-    icon: url.format(path.join(__dirname, '/img', '/logo.svg')),
+    icon: url.format('./img/logo.svg'),
   });
-
 
   const replaceText = (selector, text) => {
     const element = document.getElementById(selector)

@@ -1,6 +1,6 @@
 const { app, BrowserWindow, Menu } = require('electron')
 const path = require('path')
-
+Menu.setApplicationMenu(false)
 try {
 	require('electron-reloader')(module);
 } catch (_) {}
@@ -8,7 +8,7 @@ try {
 function createWindow () {
   const win = new BrowserWindow({
     width: 480,
-    height: 170,
+    height: 180,
     resizable:false,
     frame: false,
     titleBarStyle: 'hidden',
@@ -17,9 +17,9 @@ function createWindow () {
       nodeIntegration: true
     }
   })
-
+  win.setMenuBarVisibility(false)
   win.loadFile('index.html')
-  win.webContents.openDevTools()
+  // win.webContents.openDevTools()
 }
 
 // This method will be called when Electron has finished
