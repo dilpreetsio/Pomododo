@@ -9,9 +9,10 @@ let controlButton = document.getElementById("control-button")
 let settingButton = document.getElementById("setting-button")
 let modeText = document.getElementById("mode-text")
 
+function convertToMins(time) { return parseInt(time) * 60 }
 function initApp() {
     store.initStore()
-    // currentTime = 0.1 * 60
+    currentTime = convertToMins(store.get("slot_time"))
     renderApp()
 }
 
@@ -31,30 +32,26 @@ function afterSlotCompleted() {
     if(slotsCompleted === config.numberOfSlots) {
         document.getElementById("mode-text").innerHTML = "Long break"
         store.set("mode", "long break")
-        currentTime = parseInt(store.get("long_break_time")) * 60
+        currentTime =  convertToMins(store.get("long_break_time"))
         slotsCompleted = 0
     } else {
         store.set("mode", "break")
-        currentTime = parseInt(store.get("break_time")) * 60
+        currentTime = convertToMins(store.get("break_time"))
     }
-
     store.set("slots_completed", slotsCompleted)
     timerContainer.innerHTML = getTime(currentTime)
 }
 
 function aferBreakCompleted() {
     document.getElementById("mode-text").innerHTML = "Work"
-    currentTime =  parseInt(store.get("slot_time")) * 60
-
+    currentTime = convertToMins(store.get("slot_time"))
     notification.generateNotification("Break completed", "Start working")
     timerContainer.innerHTML = getTime(currentTime)
     store.set("mode", "work")
 }
 
 controlButton.addEventListener("click", (e)=> {
-    console.log("clicked control button")
     let btn = e.currentTarget
-    console.log(btn)
     if(btn.className.includes("start-btn")) {
         if(store.get("slots_completed") == 0 && store.get("mode") === "work") {
             renderSlots(0)
@@ -107,16 +104,17 @@ function toggleTwentyRule(e) {
 
 settingButton.addEventListener("click", (e) => {
         let settings = document.getElementById("settings")
-        console.log(settings)
         if (settings.style.visibility === "visible") {
             settings.innerHTML = ""
             settings.style.visibility = "hidden"
+            win.setSize(parseInt(config.windowSize[1]), parseInt(config.windowSize[0]))
             win.setBounds({
                 height: parseInt(config.windowSize[1]),
                 width: parseInt(config.windowSize[0]),   
             })
         } else {
             settings.style.visibility = "visible"
+            win.setSize(parseInt(config.elongatedWindowSize[1]), parseInt(config.elongatedWindowSize[0]))
             win.setBounds({
                 height: parseInt(config.elongatedWindowSize[1]),
                 width: parseInt(config.elongatedWindowSize[0]),
