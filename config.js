@@ -19,5 +19,6 @@ const config = {
     ],
     numberOfSlots: 4,
     windowSize: [480, 180],
-    elongatedWindowSize: [480, 340]
+    elongatedWindowSize: [480, 350],
+    twentyTime: 20
 }

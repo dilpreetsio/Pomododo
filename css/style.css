@@ -22,7 +22,7 @@ h1, h2,h3,h4,h5 {
 hr {
     border: 0;
     height: 1px;
-    margin-top: 25px;
+    margin-top: 16px;
     background-color: #EDEDED;
 }
 
@@ -64,6 +64,7 @@ hr {
 }
 
 .settings-table {
+    margin-top: 4px;
     display: flex;
     flex-direction: column;
 }
@@ -230,6 +231,7 @@ hr {
     background-color: white; 
     border-radius: 30px; 
     border: 1px solid #2F87FF; 
+    margin: 4px;
 } 
         
 /* After slide changes */ 
@@ -252,7 +254,7 @@ hr {
         
 /* Checkbox cheked toggle label bg color */ 
 .checkbox:checked + .toggle { 
-    background-color: #64A6FF; 
+    background-color: #c8e0ff; 
 } 
         
 /* Checkbox vanished */ 

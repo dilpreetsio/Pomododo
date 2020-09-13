@@ -6,7 +6,7 @@ const store = {
         if (!localStorage.getItem("slots_completed")) localStorage.setItem("slots_completed", 0)
         if (!localStorage.getItem("mode")) localStorage.setItem("mode", "work")
         if (!localStorage.getItem("current_time")) localStorage.setItem("current_time", 0)
-        if (!localStorage.getItem("20_rule")) localStorage.setItem("20_rule", false)
+        if (!localStorage.getItem("twenty_rule")) localStorage.setItem("twenty_rule", false)
     },
     
     getStore: () => {
@@ -17,7 +17,7 @@ const store = {
             slotsCompleted: parseInt(localStorage.getItem("slots_completed")),
             currentTime: parseInt(localStorage.getItem("current_time")),
             state: localStorage.getItem("mode"),
-            twentyRule: localStorage.getItem("20_rule")
+            twentyRule: localStorage.getItem("twenty_rule")
         }
     },
 
