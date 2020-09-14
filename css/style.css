@@ -40,9 +40,16 @@ hr {
     color: #2F87FF !important;
 }
 
-#control-button {
+.control-buttons {
+    display: flex;
+    align-items: center;
     margin-left: auto;
     margin-right: 20px;
+}
+
+#reset-button {
+    margin-left: auto;
+    margin-right: 0px;
 }
 
 .header {
@@ -123,8 +130,15 @@ hr {
     cursor: pointer;
 }
 
-.start-btn:hover, .pause-btn:hover {
-    border-color: transparent transparent transparent #3282b8;
+.reset-btn {
+    box-sizing: border-box;
+    width: 24px !important;
+    height: 24px !important;
+    cursor: pointer;
+}
+
+.start-btn:hover, .pause-btn:hover, .reset-btn:hover {
+    border-color: transparent transparent transparent #88bee2;
 }
 
 #slots-container {

@@ -1,7 +1,10 @@
 # Pomododo timer
 ![Test](https://raw.githubusercontent.com/dilpreetsio/pomododo/master/logo.png)
-A cross platform pomodoro timer created using electron
-
+<br/>
+<br/>
+<br/>
+<strong>A cross platform pomodoro timer created using electron
+</strong>
 ## How to run the app locally
 
 #### Clone & install

@@ -16,10 +16,16 @@
         <h4 id="mode-text" class="ml-15"></h4>
         <div id="timer" class="main-content ml-10">
             <h1 id="timer-text"></h1>
-            <div id="control-button" class="btn start-btn">
-                <img class="svg-btn" id="start-btn" src="./img/play.svg"/>
-                <img class="svg-btn" id="pause-btn" style="display: none;" src="./img/pause.svg"/>
+            <div class="control-buttons">
+                <div id="reset-button" class="reset-btn">
+                    <img class="svg-btn" id="reset-btn" src="./img/reset.svg"/>
+                </div>
+                <div id="control-button" class="btn start-btn">
+                    <img class="svg-btn" id="start-btn" src="./img/play.svg"/>
+                    <img class="svg-btn" id="pause-btn" style="display: none;" src="./img/pause.svg"/>
+                </div>
             </div>
+            
         </div>
         <div class="footer-section">
             <div id="slots-container">
@@ -28,8 +34,6 @@
         <div id="settings" style="visibility: hidden;">
         </div>
     </div>
-    
-    
 </body>
 <script src="./config.js"></script>
 <script src="./js/store.js"></script>

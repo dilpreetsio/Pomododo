@@ -1,4 +1,4 @@
-import { notification } from "./notifications.js"
+import { notification, messages } from "./notifications.js"
 let { remote, shell } = require('electron')
 let win = remote.getCurrentWindow()
 
@@ -17,7 +17,7 @@ let App = function() {
     this.timerContainer = document.getElementById("timer-text")
     this.controlButton = document.getElementById("control-button")
     this.settingButton = document.getElementById("setting-button")
-    this.resetButton = document.getElementById("setting-button")
+    this.resetButton = document.getElementById("reset-button")
     this.modeText = document.getElementById("mode-text")
 
     this.init = () => {
@@ -25,6 +25,7 @@ let App = function() {
         this.currentTime = convertToSec(store.get("slot_time"))
         this.controlButton.addEventListener("click", this.eventHandlers.updateTimerState)
         this.settingButton.addEventListener("click", this.eventHandlers.toggleSettings)
+        this.resetButton.addEventListener("click", this.eventHandlers.resetApp)
         this.setTwentyTimer()
         this.renderApp()
     }
@@ -254,6 +255,7 @@ let App = function() {
             store.set("slots_completed", 0)
             store.set("mode", "work")
             this.modeText.innerHTML = "Work"
+            this.timerContainer.innerHTML = getTime(convertToSec(store.get("slot_time")))
             this.renderSlots(0)
             if(this.timer) clearTimeout(this.timer)
         }
