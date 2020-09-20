@@ -239,7 +239,10 @@ hr {
     margin-left: 15px;
 }
 
-/* toggle in label designing */ 
+.pointer {
+    cursor: pointer;
+}
+
 .toggle { 
     position : relative ; 
     display : inline-block; 
@@ -251,7 +254,6 @@ hr {
     margin: 4px;
 } 
         
-/* After slide changes */ 
 .toggle:after { 
     content: ''; 
     position: absolute; 
@@ -264,17 +266,14 @@ hr {
     transition: all 0.3s; 
 }
         
-/* Checkbox cheked effect */ 
 .checkbox:checked + .toggle::after { 
     left : 12px;  
 } 
         
-/* Checkbox cheked toggle label bg color */ 
 .checkbox:checked + .toggle { 
     background-color: #c8e0ff; 
 } 
         
-/* Checkbox vanished */ 
 .checkbox {  
     display : none; 
 } 

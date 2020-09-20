@@ -171,7 +171,7 @@ let App = function() {
         footer.style.fontSize = "10px"
         footer.style.marginTop = "4px"
         footer.style.textDecoration = "none"
-        footer.innerHTML = `Made with ❤️ by <strong style="color: '#2F87FF'">dilpreetsio</strong>`
+        footer.innerHTML = `Made with ❤️ by <strong style="color: #2F87FF !important; cursor: pointer">dilpreetsio</strong>`
         footer.addEventListener("click", (e) => {
             shell.openExternal('https://twitter.com/dilpreetsio')
         })
