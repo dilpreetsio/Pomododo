@@ -39,15 +39,16 @@ let App = function() {
         this.modeText.innerHTML = "Break"
         let slotsCompleted = parseInt(store.get("slots_completed")) + 1
         
-        
-        notification.generateNotification("Slot completed", "Take a break")
         if(slotsCompleted === config.numberOfSlots) {
             document.getElementById("mode-text").innerHTML = "Long break"
             store.set("mode", "long break")
+            notification.generateNotification("takeLongBreak")
             this.currentTime =  convertToSec(store.get("long_break_time"))
             slotsCompleted = 0
         } else {
             store.set("mode", "break")
+            notification.generateNotification("takeBreak")
+
             this.currentTime = convertToSec(store.get("break_time"))
         }
         this.renderSlots(slotsCompleted)
@@ -58,7 +59,7 @@ let App = function() {
     this.aferBreakCompleted = () => {
         document.getElementById("mode-text").innerHTML = "Work"
         this.currentTime = convertToSec(store.get("slot_time"))
-        notification.generateNotification("Break completed", "Start working")
+        notification.generateNotification("startWork")
         this.timerContainer.innerHTML = getTime(this.currentTime)
         store.set("mode", "work")
     }
@@ -67,10 +68,8 @@ let App = function() {
         if (this.twentyReminder) clearInterval(this.twentyReminder)
 
         if (store.get("twenty_rule") === "true") {
-            console.log("here")
             this.twentyReminder = setInterval(() => {
-                console.log("creating notification")
-                notification.generateNotification("You have been looking at the screen for 20 mins without a break", "Take a break")
+                notification.generateNotification("twentyMessage")
             }, convertToMs(20))
         }
     }
@@ -185,9 +184,6 @@ let App = function() {
     }
 
     this.eventHandlers = {
-        changeSettings: () => {
-
-        },
         updateTimerState: (e) => {
             let btn = e.currentTarget
             if(btn.className.includes("start-btn")) {
@@ -257,6 +253,7 @@ let App = function() {
             this.modeText.innerHTML = "Work"
             this.timerContainer.innerHTML = getTime(convertToSec(store.get("slot_time")))
             this.renderSlots(0)
+            this.toggleStartButton(true)
             if(this.timer) clearTimeout(this.timer)
         }
     }

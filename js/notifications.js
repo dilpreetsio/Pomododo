@@ -4,23 +4,24 @@ export const messages = {
         message: "You have been looking at the screen for 20 mins without a break",
     },
     startWork: {
-        header: "",
-        message: "",
+        header: "Your break is completed",
+        message: "Let's get back to work",
     },
     takeBreak: {
-        header: "",
-        message: "",
+        header: "Amazing! You completed the slot",
+        message: "Let's take a well deserved break",
     },
     takeLongBreak: {
-        header: "",
-        message: "",
+        header: "Awesome! You completed 4 slots.",
+        message: "Take a long break before getting back to work",
     }
 }
 
 export const notification = {
-    generateNotification: (header, message) => {
-        const myNotification = new Notification(header, {
-            body: message
+    generateNotification: (messageType) => {
+        const notification = messages[`${messageType}`]
+        const myNotification = new Notification(notification.header, {
+            body: notification.message
         })
         
         myNotification.onclick = () => {

@@ -13,7 +13,13 @@
   "build": {
     "appId": "com.dilpreetsio.pomododo",
     "mac": {
-      "category": "com.dilpreetsio.pomododo.productivity"
+      "category": "Utility"
+    },
+    "linux": {
+      "category": "Utility"
+    },
+    "directories": {
+      "buildResources": "build"
     }
   },
   "compression": "store",
