@@ -31,20 +31,18 @@ let App = function() {
     }
 
     this.updateCurrentTime = (timeType) => {
-        this.currentTime = parseInt(store.get(`${timeType}`)) * 60
+        this.currentTime = (parseInt(store.get(`${timeType}`)) * 60)
         this.timerContainer.innerHTML = getTime(this.currentTime)
     }
 
     this.afterSlotCompleted = () => {
         this.modeText.innerHTML = "Break"
         let slotsCompleted = parseInt(store.get("slots_completed")) + 1
-        
         if(slotsCompleted === config.numberOfSlots) {
             document.getElementById("mode-text").innerHTML = "Long break"
             store.set("mode", "long break")
             notification.generateNotification("takeLongBreak")
             this.currentTime =  convertToSec(store.get("long_break_time"))
-            slotsCompleted = 0
         } else {
             store.set("mode", "break")
             notification.generateNotification("takeBreak")
@@ -61,6 +59,10 @@ let App = function() {
         this.currentTime = convertToSec(store.get("slot_time"))
         notification.generateNotification("startWork")
         this.timerContainer.innerHTML = getTime(this.currentTime)
+        if (store.get("mode")==="long break") {
+            store.set("slots_completed", 0)
+            this.renderSlots()
+        }
         store.set("mode", "work")
     }
 

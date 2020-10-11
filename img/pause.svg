@@ -1,1 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90 110"><title>pause</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_21" data-name="Layer 21"><rect width="14" height="110" fill="#64A6FF"/><rect x="76" width="14" height="110" fill="#64A6FF"/></g></g></svg>
+<svg width="90" height="110" viewBox="0 0 90 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M22 11H6V99H22V11Z" fill="#64A6FF"/>
+<path d="M83 11H67V99H83V11Z" fill="#64A6FF"/>
+</svg>
