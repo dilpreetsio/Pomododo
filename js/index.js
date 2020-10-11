@@ -171,7 +171,7 @@ let App = function() {
         footer.style.fontSize = "10px"
         footer.style.marginTop = "4px"
         footer.style.textDecoration = "none"
-        footer.innerHTML = `Made with ❤️ by <strong style="color: #2F87FF !important; cursor: pointer">dilpreetsio</strong>`
+        footer.innerHTML = `Made with ❤️ by <strong style="color: #2F87FF !important; cursor: pointer">Dilpreetsio</strong>`
         footer.addEventListener("click", (e) => {
             shell.openExternal('https://twitter.com/dilpreetsio')
         })
@@ -250,8 +250,10 @@ let App = function() {
         resetApp: () => {
             store.set("slots_completed", 0)
             store.set("mode", "work")
+            store.set("timer", convertToSec(store.get("slot_time")))
             this.modeText.innerHTML = "Work"
             this.timerContainer.innerHTML = getTime(convertToSec(store.get("slot_time")))
+            this.currentTime = convertToSec(store.get("slot_time"))
             this.renderSlots(0)
             this.toggleStartButton(true)
             if(this.timer) clearTimeout(this.timer)
