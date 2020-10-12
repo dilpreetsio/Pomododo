@@ -16,7 +16,8 @@
       "category": "Utility"
     },
     "linux": {
-      "category": "Utility"
+      "category": "Utility",
+      "target": "AppImage, snap, deb, pacman"
     },
     "directories": {
       "buildResources": "build"
