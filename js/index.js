@@ -163,8 +163,8 @@ let App = function() {
                 timeRow.appendChild(slotTab)
             })
     
-        settingsTable.appendChild(timeRow)
-        settings.appendChild(settingsTable)
+            settingsTable.appendChild(timeRow)
+            settings.appendChild(settingsTable)
         })
 
         let footer = document.createElement("div")
@@ -188,6 +188,7 @@ let App = function() {
     this.eventHandlers = {
         updateTimerState: (e) => {
             let btn = e.currentTarget
+            console.log(btn)
             if(btn.className.includes("start-btn")) {
                 if(store.get("slots_completed") == 0 && store.get("mode") === "work") {
                     this.renderSlots(0)
@@ -207,8 +208,8 @@ let App = function() {
                     }
                 }, 1000)
             } else {
-                this.toggleStartButton(true)
                 btn.className = "btn start-btn"
+                this.toggleStartButton(true)
                 store.set("timer", this.currentTime)
                 clearInterval(this.timer)
             }
@@ -258,6 +259,7 @@ let App = function() {
             this.currentTime = convertToSec(store.get("slot_time"))
             this.renderSlots(0)
             this.toggleStartButton(true)
+            this.controlButton.className = "btn start-btn"
             if(this.timer) clearTimeout(this.timer)
         }
     }
