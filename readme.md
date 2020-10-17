@@ -24,5 +24,10 @@ npm start
 npm run build
 ```
 
+#### Project Roadmap
+- [ ] Add dark mode
+- [ ] Add water reminder
+- [ ] Add custom time for slots & breaks
+
 ## License
 MIT
