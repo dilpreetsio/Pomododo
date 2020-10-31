@@ -17,6 +17,11 @@ function createWindow () {
       nodeIntegration: true
     }
   })
+  
+  if (process.platform === "linux") {
+    win.icon = path.join(`${__dirname}/icon/icon.png`);
+  }
+
   win.setMenuBarVisibility(false)
   win.loadFile('index.html')
   // win.webContents.openDevTools()

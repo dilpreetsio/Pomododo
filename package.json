@@ -8,7 +8,10 @@
     "pack": "electron-builder --dir",
     "build": "electron-builder"
   },
-  "author": "dilpreetsio",
+  "author": {
+    "name": "dilpreetsio",
+    "email": "idilpreetsio@gmail.com"
+  },
   "license": "MIT",
   "build": {
     "appId": "com.dilpreetsio.pomododo",
@@ -17,7 +20,11 @@
     },
     "linux": {
       "category": "Utility",
-      "target": "AppImage, snap, deb, pacman"
+      "icon": "builds/icon.icns",
+      "target": [
+        "deb",
+        "snap"
+      ]
     },
     "directories": {
       "buildResources": "build"
