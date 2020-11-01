@@ -1,9 +1,9 @@
-# Pomododo timer
-![Test](https://raw.githubusercontent.com/dilpreetsio/pomododo/master/logo.png)
+# Pomododo
+![Pomododo Logo](https://raw.githubusercontent.com/dilpreetsio/pomododo/master/build/icon.png)
 <br/>
 <br/>
 <br/>
-<strong>A cross platform pomodoro timer created using electron
+<strong>A simple cross platform pomodoro timer
 </strong>
 ## How to run the app locally
 
@@ -25,6 +25,7 @@ npm run build
 ```
 
 #### Project Roadmap
+- [ ] Add daily, weekly, monthly & yearly stats
 - [ ] Add dark mode
 - [ ] Add water reminder
 - [ ] Add custom time for slots & breaks

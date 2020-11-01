@@ -9,6 +9,8 @@ window.addEventListener('DOMContentLoaded', () => {
   new customTitlebar.Titlebar({
     backgroundColor: customTitlebar.Color.fromHex('#f0f0f0'),
     icon: url.format('./img/logo.svg'),
+    maximizable: false,
+    minimizable: false
   });
 
   const replaceText = (selector, text) => {
