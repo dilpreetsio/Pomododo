@@ -1,5 +1,6 @@
 const store = {
     initStore: () => {
+        let date = new Date()
         if (!localStorage.getItem("break_time")) localStorage.setItem("break_time", 5)
         if (!localStorage.getItem("long_break_time")) localStorage.setItem("long_break_time", 15)
         if (!localStorage.getItem("slot_time")) localStorage.setItem("slot_time", 30)
@@ -7,18 +8,18 @@ const store = {
         if (!localStorage.getItem("mode")) localStorage.setItem("mode", "work")
         if (!localStorage.getItem("current_time")) localStorage.setItem("current_time", 0)
         if (!localStorage.getItem("twenty_rule")) localStorage.setItem("twenty_rule", false)
-        if (!localStorage.getItem("daily_stat")) localStorage.setItem("daily_stat", 0)
-        if (!localStorage.getItem("daily_time")) localStorage.setItem("daily_time", 0)
-        if (!localStorage.getItem("weekly_stat")) localStorage.setItem("weekly_stat", 0)
-        if (!localStorage.getItem("weekly_time")) localStorage.setItem("weekly_time", 0)
-        if (!localStorage.getItem("monthly_stat")) localStorage.setItem("monthly_stat", 0)
-        if (!localStorage.getItem("monthly_time")) localStorage.setItem("monthly_time", 0)
-        if (!localStorage.getItem("yearly_stat")) localStorage.setItem("yearly_stat", 0)
-        if (!localStorage.getItem("yearly_time")) localStorage.setItem("yearly_time", 0)
-        if (!localStorage.getItem("current_day")) localStorage.setItem("yearly_time", 0)
-        if (!localStorage.getItem("current_week")) localStorage.setItem("yearly_time", 0)
-        if (!localStorage.getItem("current_month")) localStorage.setItem("yearly_time", 0)
-        if (!localStorage.getItem("current_year")) localStorage.setItem("yearly_time", 0)
+        if (!localStorage.getItem("interruptions")) localStorage.setItem("interruptions", 0)
+        if (!localStorage.getItem("day_stat")) localStorage.setItem("day_stat", 0)
+        if (!localStorage.getItem("day_time")) localStorage.setItem("day_time", 0)
+        if (!localStorage.getItem("week_stat")) localStorage.setItem("week_stat", 0)
+        if (!localStorage.getItem("week_time")) localStorage.setItem("week_time", 0)
+        if (!localStorage.getItem("month_stat")) localStorage.setItem("month_stat", 0)
+        if (!localStorage.getItem("month_time")) localStorage.setItem("month_time", 0)
+        if (!localStorage.getItem("year_stat")) localStorage.setItem("year_stat", 0)
+        if (!localStorage.getItem("year_time")) localStorage.setItem("year_time", 0)
+        if (!localStorage.getItem("current_day")) localStorage.setItem("current_day", date.getDate())
+        if (!localStorage.getItem("current_month")) localStorage.setItem("current_month", date.getMonth())
+        if (!localStorage.getItem("current_year")) localStorage.setItem("current_year", date.getFullYear())
     },
     
     getStore: () => {

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap'); */
 
 html,body {
     overflow: hidden;
@@ -32,6 +32,18 @@ hr {
     flex-direction: row;
 }
 
+.col {
+    flex: 1;
+}
+
+.t-center{
+    text-align: center;
+}
+
+.bold-color {
+    color: #2F87FF !important;
+}
+
 #settings {
     padding: 10px;
 }
@@ -58,7 +70,7 @@ hr {
     justify-content: flex-end;
 }
 
-.setting {
+.setting, .stats {
     width:24px;
     height:24px;
     padding-top: 2px;
@@ -66,6 +78,9 @@ hr {
     cursor: pointer;
 }
 
+.stats > img {
+    height: 100%;
+}
 .setting > img {
     height: 100%;
 }

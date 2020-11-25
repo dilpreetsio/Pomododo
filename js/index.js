@@ -17,6 +17,7 @@ let App = function() {
     this.timerContainer = document.getElementById("timer-text")
     this.controlButton = document.getElementById("control-button")
     this.settingButton = document.getElementById("setting-button")
+    this.statsButton = document.getElementById("stats-button")
     this.resetButton = document.getElementById("reset-button")
     this.modeText = document.getElementById("mode-text")
 
@@ -25,6 +26,7 @@ let App = function() {
         this.currentTime = convertToSec(store.get("slot_time"))
         this.controlButton.addEventListener("click", this.eventHandlers.updateTimerState)
         this.settingButton.addEventListener("click", this.eventHandlers.toggleSettings)
+        this.statsButton.addEventListener("click", this.eventHandlers.toggleStats)
         this.resetButton.addEventListener("click", this.eventHandlers.resetApp)
         this.setTwentyTimer()
         this.renderApp()
@@ -180,15 +182,22 @@ let App = function() {
         settings.appendChild(footer)
     }
     
+    this.renderStats = (stats) => {
+        
+    }
+
     this.toggleStartButton = (isStart) => {
         document.getElementById('start-btn').style.display = isStart ? "block" : "none"
         document.getElementById('pause-btn').style.display = isStart ? "none" : "block"
     }
 
+    // dimension  {height : h, width: w}
+    this.setWindowBounds = (dimension) => {
+        win.setBounds(dimension, true)
+    }
     this.eventHandlers = {
         updateTimerState: (e) => {
             let btn = e.currentTarget
-            console.log(btn)
             if(btn.className.includes("start-btn")) {
                 if(store.get("slots_completed") == 0 && store.get("mode") === "work") {
                     this.renderSlots(0)
@@ -211,10 +220,30 @@ let App = function() {
                 btn.className = "btn start-btn"
                 this.toggleStartButton(true)
                 store.set("timer", this.currentTime)
+                store.set("interruptions", parseInt(store.get("interruptions")) + 1)
                 clearInterval(this.timer)
             }
         },
         resetTimer: (e) => {},
+        toggleStats: (e) => {
+            let stats = document.getElementById("stats")
+
+            if (stats.style.visibility === "visible") {
+                stats.innerHTML = ""
+                stats.style.visibility = "hidden"
+                win.setBounds({
+                    height: parseInt(config.windowSize[1]),
+                    width: parseInt(config.windowSize[0]),   
+                }, true)
+            } else {
+                stats.style.visibility = "visible"
+                win.setBounds({
+                    height: parseInt(config.elongatedWindowSize[1]),
+                    width: parseInt(config.elongatedWindowSize[0]),
+                }, true)
+                this.renderSettings(settings)
+            }
+        },
         toggleSettings: (e) => {
             let settings = document.getElementById("settings")
             if (settings.style.visibility === "visible") {
