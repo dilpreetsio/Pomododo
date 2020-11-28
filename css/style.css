@@ -1,4 +1,4 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap');
 
 html,body {
     overflow: hidden;
@@ -34,6 +34,13 @@ hr {
 
 .col {
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 80px;
+}
+
+.col > h1,h2,h3,h4,h5 {
+    padding: 2px;
 }
 
 .t-center{
@@ -44,8 +51,12 @@ hr {
     color: #2F87FF !important;
 }
 
-#settings {
+#settings, #stats {
     padding: 10px;
+}
+
+.p-top {
+    padding-top: 8px;
 }
 
 #timer-text {
@@ -292,3 +303,11 @@ hr {
 .checkbox {  
     display : none; 
 } 
+
+.b-right {
+    border-right: 1px solid #EDEDED;
+}
+
+.b-top {
+    border-top: 1px solid #EDEDED;
+}

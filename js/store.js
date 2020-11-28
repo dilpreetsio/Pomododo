@@ -9,17 +9,23 @@ const store = {
         if (!localStorage.getItem("current_time")) localStorage.setItem("current_time", 0)
         if (!localStorage.getItem("twenty_rule")) localStorage.setItem("twenty_rule", false)
         if (!localStorage.getItem("interruptions")) localStorage.setItem("interruptions", 0)
-        if (!localStorage.getItem("day_stat")) localStorage.setItem("day_stat", 0)
-        if (!localStorage.getItem("day_time")) localStorage.setItem("day_time", 0)
-        if (!localStorage.getItem("week_stat")) localStorage.setItem("week_stat", 0)
-        if (!localStorage.getItem("week_time")) localStorage.setItem("week_time", 0)
-        if (!localStorage.getItem("month_stat")) localStorage.setItem("month_stat", 0)
-        if (!localStorage.getItem("month_time")) localStorage.setItem("month_time", 0)
-        if (!localStorage.getItem("year_stat")) localStorage.setItem("year_stat", 0)
-        if (!localStorage.getItem("year_time")) localStorage.setItem("year_time", 0)
-        if (!localStorage.getItem("current_day")) localStorage.setItem("current_day", date.getDate())
-        if (!localStorage.getItem("current_month")) localStorage.setItem("current_month", date.getMonth())
-        if (!localStorage.getItem("current_year")) localStorage.setItem("current_year", date.getFullYear())
+        if (!localStorage.getItem("slot_data")) localStorage.setItem("slot_data", JSON.stringify({
+            daySlot: 0,
+            weekSlot: 0,
+            monthSlot: 0,
+            yearSlot: 0
+        }))
+        if (!localStorage.getItem("time_data")) localStorage.setItem("time_data", JSON.stringify({
+            dayTime: 0,
+            weekTime: 0,
+            monthTime: 0,
+            yearTime: 0
+        }))
+        if (!localStorage.getItem("date_data")) localStorage.setItem("date_data", JSON.stringify({
+            currentDay: date.getDate(),
+            currentMonth: date.getMonth(),
+            currentYear: date.getFullYear()
+        }))
     },
     
     getStore: () => {

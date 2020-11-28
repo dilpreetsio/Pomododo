@@ -28,13 +28,68 @@ let App = function() {
         this.settingButton.addEventListener("click", this.eventHandlers.toggleSettings)
         this.statsButton.addEventListener("click", this.eventHandlers.toggleStats)
         this.resetButton.addEventListener("click", this.eventHandlers.resetApp)
+        this.setDate()
         this.setTwentyTimer()
         this.renderApp()
+    }
+
+    this.updateApp = () => {
+        this.renderStats()
+        this.renderSettings()
     }
 
     this.updateCurrentTime = (timeType) => {
         this.currentTime = (parseInt(store.get(`${timeType}`)) * 60)
         this.timerContainer.innerHTML = getTime(this.currentTime)
+    }
+
+    this.isSameDate = () => {
+        return (new Date()).getDate() === parseInt((JSON.parse(store.get("date_data")).currentDay))
+    }
+
+    this.setDate = () => {
+        if (!this.isSameDate) {
+            const date = new Date()
+            let dateData = JSON.parse(store.get("date_data"))
+            let timeData = JSON.parse(store.get("time_data"))
+            let slotData = JSON.parse(store.get("slot_data"))
+            
+            timeData.dayTime = 0
+            if (date.getDay() === 1) {
+                timeData.weekTime = 0
+                slotData.weekSlot = 0
+            }
+            if (date.getDate() === 1) {
+                timeData.monthTime = 0
+                slotData.monthSlot = 0
+            }
+            if (date.getFullYear() !== parseInt(dateData.currentYear)) {
+                timeData.yearTime = 0
+                slotData.yearSlot = 0
+            }
+
+            dateDate.currentDay = date.getDate()
+            dateDate.currentMonth = date.getMonth()
+            dateDate.currentYear = date.getFullYear()
+            store.set("date_data", JSON.stringify(dateData))
+            store.set("time_data", JSON.stringify(timeData))
+        }
+    }
+
+    this.updateAppData = () => {
+        let timeData = JSON.parse(store.get("time_data"))
+        let slotData = JSON.parse(store.get("slot_data"))
+        const slotTime = parseInt(store.get("slot_time"))
+        timeData.dayTime = parseInt(timeData.dayTime) + slotTime
+        slotData.daySlot = parseInt(slotData.daySlot) + 1
+        timeData.weekTime = parseInt(timeData.weekTime) + slotTime
+        slotData.weekSlot = parseInt(slotData.weekSlot) + 1
+        timeData.monthTime = parseInt(timeData.monthTime) + slotTime
+        slotData.monthSlot = parseInt(slotData.monthSlot) + 1
+        timeData.yearTime = parseInt(timeData.yearTime) + slotTime
+        slotData.yearSlot = parseInt(slotData.yearSlot) + 1
+        store.set("slot_data", JSON.stringify(slotData))
+        store.set("time_data", JSON.stringify(timeData))
     }
 
     this.afterSlotCompleted = () => {
@@ -48,11 +103,11 @@ let App = function() {
         } else {
             store.set("mode", "break")
             notification.generateNotification("takeBreak")
-
             this.currentTime = convertToSec(store.get("break_time"))
         }
         this.renderSlots(slotsCompleted)
         store.set("slots_completed", slotsCompleted)
+        this.updateAppData()
         this.timerContainer.innerHTML = getTime(this.currentTime)
     }
 
@@ -183,7 +238,17 @@ let App = function() {
     }
     
     this.renderStats = (stats) => {
-        
+        const timeData = JSON.parse(store.get("time_data"))
+        const slotData = JSON.parse(store.get("slot_data"))
+        document.getElementById("day-slots").innerHTML = slotData.daySlot
+        document.getElementById("day-time").innerHTML = getTime(parseInt(timeData.dayTime))
+        document.getElementById("week-slots").innerHTML = slotData.weekSlot
+        document.getElementById("week-time").innerHTML = getTime(parseInt(timeData.weekTime))
+        document.getElementById("month-slots").innerHTML = slotData.monthSlot
+        document.getElementById("month-time").innerHTML = getTime(parseInt(timeData.monthTime))
+        document.getElementById("year-slots").innerHTML = slotData.yearSlot
+        document.getElementById("year-time").innerHTML = getTime(parseInt(timeData.yearTime))
+        document.getElementById("interruptions").innerHTML = store.get("interruptions")
     }
 
     this.toggleStartButton = (isStart) => {
@@ -224,19 +289,19 @@ let App = function() {
                 clearInterval(this.timer)
             }
         },
-        resetTimer: (e) => {},
         toggleStats: (e) => {
             let stats = document.getElementById("stats")
-
             if (stats.style.visibility === "visible") {
-                stats.innerHTML = ""
                 stats.style.visibility = "hidden"
+                stats.style.display = "none"
                 win.setBounds({
                     height: parseInt(config.windowSize[1]),
                     width: parseInt(config.windowSize[0]),   
                 }, true)
             } else {
                 stats.style.visibility = "visible"
+                stats.style.display = "block"
+                this.renderStats()
                 win.setBounds({
                     height: parseInt(config.elongatedWindowSize[1]),
                     width: parseInt(config.elongatedWindowSize[0]),
@@ -249,12 +314,14 @@ let App = function() {
             if (settings.style.visibility === "visible") {
                 settings.innerHTML = ""
                 settings.style.visibility = "hidden"
+                settings.style.display = "none"
                 win.setBounds({
                     height: parseInt(config.windowSize[1]),
                     width: parseInt(config.windowSize[0]),   
                 }, true)
             } else {
                 settings.style.visibility = "visible"
+                settings.style.display = "block"
                 win.setBounds({
                     height: parseInt(config.elongatedWindowSize[1]),
                     width: parseInt(config.elongatedWindowSize[0]),
