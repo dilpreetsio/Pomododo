@@ -1,7 +1,8 @@
 import { notification, messages } from "./notifications.js"
 let { remote, shell } = require('electron')
 let win = remote.getCurrentWindow()
-
+let testDate = new Date()
+testDate.setDate(testDate.getDate() + 1)
 function convertToSec(time) { return parseInt(time) * 60 }
 function convertToMs(time) { return (parseInt(time) * 60 * 1000) }
 function getTime(time) {
@@ -62,7 +63,7 @@ let App = function() {
     }
 
     this.isSameDate = (oldDate) => {
-        const date = new Date()
+        const date = testDate
         return (date.getDate() === oldDate.getDate() && 
                 date.getMonth() === oldDate.getMonth() &&
                 date.getFullYear() === oldDate.getFullYear())
@@ -97,6 +98,7 @@ let App = function() {
             store.set("date_data", JSON.stringify(dateData))
             store.set("time_data", JSON.stringify(timeData))
             store.set("slot_data", JSON.stringify(slotData))
+            this.renderStats()
         }
     }
 
@@ -114,6 +116,7 @@ let App = function() {
         slotData.yearSlot = parseInt(slotData.yearSlot) + 1
         store.set("slot_data", JSON.stringify(slotData))
         store.set("time_data", JSON.stringify(timeData))
+        this.renderStats()
     }
 
     this.afterSlotCompleted = () => {
@@ -132,7 +135,6 @@ let App = function() {
         this.renderSlots(slotsCompleted)
         store.set("slots_completed", slotsCompleted)
         this.updateAppData()
-        this.setDate()
         this.timerContainer.innerHTML = getTime(this.currentTime)
     }
 
@@ -146,7 +148,6 @@ let App = function() {
             this.renderSlots()
         }
         store.set("mode", "work")
-        this.setDate()
     }
 
     this.setTwentyTimer = (toggleState) => {
