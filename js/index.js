@@ -10,6 +10,12 @@ function getTime(time) {
     return `${minutes < 10 ? "0" + minutes : minutes} : ${seconds < 10 ? "0" + seconds : seconds}` 
 }
 
+function getTimeInterval(oldDate) {
+    let newDate = oldDate
+    newDate.setDate(newDate.getDate() + 1)
+    return newDate - (new Date())
+}
+
 let App = function() {
     this.currentTime = parseInt(store.get("slot_time") * 60)
     this.timer = undefined
@@ -20,6 +26,7 @@ let App = function() {
     this.statsButton = document.getElementById("stats-button")
     this.resetButton = document.getElementById("reset-button")
     this.modeText = document.getElementById("mode-text")
+    this.intervalTime = 0
 
     this.init = () => {
         store.initStore()
@@ -28,9 +35,15 @@ let App = function() {
         this.settingButton.addEventListener("click", this.eventHandlers.toggleSettings)
         this.statsButton.addEventListener("click", this.eventHandlers.toggleStats)
         this.resetButton.addEventListener("click", this.eventHandlers.resetApp)
-        this.setDate()
         this.setTwentyTimer()
         this.renderApp()
+        this.setDate()
+
+        this.intervalTime = getTimeInterval(this.getOldDate())
+        setInterval(function () {
+            this.setDate()
+            this.intervalTime = getTimeInterval(this.getOldDate())
+        }, this.intervalTime)
     }
 
     this.updateApp = () => {
@@ -43,19 +56,29 @@ let App = function() {
         this.timerContainer.innerHTML = getTime(this.currentTime)
     }
 
-    this.isSameDate = () => {
-        return (new Date()).getDate() === parseInt((JSON.parse(store.get("date_data")).currentDay))
+    this.getOldDate = () => {
+        let dateData = JSON.parse(store.get("date_data"))
+        return new Date(dateData.currentYear, dateData.currentMonth, dateData.currentDay)
+    }
+
+    this.isSameDate = (oldDate) => {
+        const date = new Date()
+        return (date.getDate() === oldDate.getDate() && 
+                date.getMonth() === oldDate.getMonth() &&
+                date.getFullYear() === oldDate.getFullYear())
     }
 
     this.setDate = () => {
-        if (!this.isSameDate) {
+        let dateData = JSON.parse(store.get("date_data"))
+        let oldDate = this.getOldDate()
+        if (!this.isSameDate(oldDate)) {
             const date = new Date()
-            let dateData = JSON.parse(store.get("date_data"))
             let timeData = JSON.parse(store.get("time_data"))
             let slotData = JSON.parse(store.get("slot_data"))
             
             timeData.dayTime = 0
-            if (date.getDay() === 1) {
+            slotData.daySlot = 0
+            if (date.getDay() === 1 || ((date - oldDate) / (1000*60*60*24) > 6)) {
                 timeData.weekTime = 0
                 slotData.weekSlot = 0
             }
@@ -68,11 +91,12 @@ let App = function() {
                 slotData.yearSlot = 0
             }
 
-            dateDate.currentDay = date.getDate()
-            dateDate.currentMonth = date.getMonth()
-            dateDate.currentYear = date.getFullYear()
+            dateData.currentDay = date.getDate()
+            dateData.currentMonth = date.getMonth()
+            dateData.currentYear = date.getFullYear()
             store.set("date_data", JSON.stringify(dateData))
             store.set("time_data", JSON.stringify(timeData))
+            store.set("slot_data", JSON.stringify(slotData))
         }
     }
 
@@ -108,6 +132,7 @@ let App = function() {
         this.renderSlots(slotsCompleted)
         store.set("slots_completed", slotsCompleted)
         this.updateAppData()
+        this.setDate()
         this.timerContainer.innerHTML = getTime(this.currentTime)
     }
 
@@ -121,6 +146,7 @@ let App = function() {
             this.renderSlots()
         }
         store.set("mode", "work")
+        this.setDate()
     }
 
     this.setTwentyTimer = (toggleState) => {
