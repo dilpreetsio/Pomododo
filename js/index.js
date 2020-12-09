@@ -1,8 +1,6 @@
 import { notification, messages } from "./notifications.js"
 let { remote, shell } = require('electron')
 let win = remote.getCurrentWindow()
-let testDate = new Date()
-testDate.setDate(testDate.getDate() + 1)
 function convertToSec(time) { return parseInt(time) * 60 }
 function convertToMs(time) { return (parseInt(time) * 60 * 1000) }
 function getTime(time) {
@@ -37,7 +35,6 @@ let App = function() {
         this.statsButton.addEventListener("click", this.eventHandlers.toggleStats)
         this.resetButton.addEventListener("click", this.eventHandlers.resetApp)
         this.setTwentyTimer()
-        this.renderApp()
         this.setDate()
 
         this.intervalTime = getTimeInterval(this.getOldDate())
@@ -45,6 +42,8 @@ let App = function() {
             this.setDate()
             this.intervalTime = getTimeInterval(this.getOldDate())
         }, this.intervalTime)
+
+        this.renderApp()
     }
 
     this.updateApp = () => {
@@ -53,7 +52,7 @@ let App = function() {
     }
 
     this.updateCurrentTime = (timeType) => {
-        this.currentTime = (parseInt(store.get(`${timeType}`)) * 60)
+        this.currentTime = convertToSec(parseInt(store.get(`${timeType}`)))
         this.timerContainer.innerHTML = getTime(this.currentTime)
     }
 
@@ -63,7 +62,7 @@ let App = function() {
     }
 
     this.isSameDate = (oldDate) => {
-        const date = testDate
+        const date = new Date()
         return (date.getDate() === oldDate.getDate() && 
                 date.getMonth() === oldDate.getMonth() &&
                 date.getFullYear() === oldDate.getFullYear())
@@ -98,6 +97,7 @@ let App = function() {
             store.set("date_data", JSON.stringify(dateData))
             store.set("time_data", JSON.stringify(timeData))
             store.set("slot_data", JSON.stringify(slotData))
+            store.set("interruptions", 0)
             this.renderStats()
         }
     }

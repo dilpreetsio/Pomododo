@@ -25,7 +25,7 @@ npm run build
 ```
 
 #### Project Roadmap
-- [ ] Add daily, weekly, monthly & yearly stats
+- [x] Add daily, weekly, monthly & yearly stats
 - [ ] Add dark mode
 - [ ] Add water reminder
 - [ ] Add custom time for slots & breaks
