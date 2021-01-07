@@ -25,6 +25,8 @@ let App = function() {
     this.statsButton = document.getElementById("stats-button")
     this.resetButton = document.getElementById("reset-button")
     this.modeText = document.getElementById("mode-text")
+    this.stats = document.getElementById("stats")
+    this.settings = document.getElementById("settings")
     this.intervalTime = 0
 
     this.init = () => {
@@ -84,10 +86,16 @@ let App = function() {
             }
             if (date.getDate() === 1) {
                 timeData.monthTime = 0
+                timeData.weekTime = 0
+                slotData.weekSlot = 0
                 slotData.monthSlot = 0
             }
             if (date.getFullYear() !== parseInt(dateData.currentYear)) {
                 timeData.yearTime = 0
+                timeData.monthTime = 0
+                timeData.weekTime = 0
+                slotData.weekSlot = 0
+                slotData.monthSlot = 0
                 slotData.yearSlot = 0
             }
 
@@ -287,6 +295,27 @@ let App = function() {
     this.setWindowBounds = (dimension) => {
         win.setBounds(dimension, true)
     }
+
+    this.togglePanel = (panel) => {
+        if (panel.style.visibility === "visible") {
+            panel.style.visibility = "hidden"
+            panel.style.display = "none"
+            win.setBounds({
+                height: parseInt(config.windowSize[1]),
+                width: parseInt(config.windowSize[0]),   
+            }, true)
+        } else {
+            panel.style.visibility = "visible"
+            panel.style.display = "block"
+            this.renderStats()
+            win.setBounds({
+                height: parseInt(config.elongatedWindowSize[1]),
+                width: parseInt(config.elongatedWindowSize[0]),
+            }, true)
+            if (panel.id === "settings") this.renderSettings(settings)
+        }
+    }
+
     this.eventHandlers = {
         updateTimerState: (e) => {
             let btn = e.currentTarget
@@ -317,44 +346,16 @@ let App = function() {
             }
         },
         toggleStats: (e) => {
-            let stats = document.getElementById("stats")
-            if (stats.style.visibility === "visible") {
-                stats.style.visibility = "hidden"
-                stats.style.display = "none"
-                win.setBounds({
-                    height: parseInt(config.windowSize[1]),
-                    width: parseInt(config.windowSize[0]),   
-                }, true)
-            } else {
-                stats.style.visibility = "visible"
-                stats.style.display = "block"
-                this.renderStats()
-                win.setBounds({
-                    height: parseInt(config.elongatedWindowSize[1]),
-                    width: parseInt(config.elongatedWindowSize[0]),
-                }, true)
-                this.renderSettings(settings)
-            }
+            let stats = this.stats
+            this.settings.style.visibility = "hidden"
+            this.settings.style.display = "none"
+            this.togglePanel(this.stats)
         },
         toggleSettings: (e) => {
-            let settings = document.getElementById("settings")
-            if (settings.style.visibility === "visible") {
-                settings.innerHTML = ""
-                settings.style.visibility = "hidden"
-                settings.style.display = "none"
-                win.setBounds({
-                    height: parseInt(config.windowSize[1]),
-                    width: parseInt(config.windowSize[0]),   
-                }, true)
-            } else {
-                settings.style.visibility = "visible"
-                settings.style.display = "block"
-                win.setBounds({
-                    height: parseInt(config.elongatedWindowSize[1]),
-                    width: parseInt(config.elongatedWindowSize[0]),
-                }, true)
-                this.renderSettings(settings)
-            }
+            let settings = this.settings
+            this.stats.style.visibility = "hidden"
+            this.stats.style.display = "none"
+            this.togglePanel(settings)
         },
         changeTimeSetting: (e) => {
             const slug = e.currentTarget.getAttribute("data-slug")
